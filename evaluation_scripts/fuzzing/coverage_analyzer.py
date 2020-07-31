@@ -55,5 +55,5 @@ if __name__ == '__main__':
 
     classifier = MnistLSTMClassifier()
     classifier.load_hidden_state_model(args.dl_model)
-    fuzzing_analyzer(classifier, args.fuzz_output_folder, args.wrapper, args.type)
+    fuzzing_analyzer(classifier, args.inputs_folder, args.wrapper, args.type)
 
