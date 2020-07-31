@@ -91,11 +91,11 @@ if __name__ == "__main__":
 
     lstm_classifier = MnistLSTMClassifier()
     # train an rnn model
-    # lstm_classifier.create_model()
-    # lstm_classifier.train(save_path)
-    # lstm_classifier.evaluate()
+    lstm_classifier.create_model()
+    lstm_classifier.train(save_path)
+    lstm_classifier.evaluate()
 
     # Load a trained model with return_sequence enabled.
-    profile_path = "test/output/profile_save"
-    lstm_classifier.load_hidden_state_model(os.path.join(save_path, "model.h5"))
-    lstm_classifier.profile_train_data(profile_path)
+    # profile_path = "test/output/profile_save"
+    # lstm_classifier.load_hidden_state_model(os.path.join(save_path, "model.h5"))
+    # lstm_classifier.profile_train_data(profile_path)
