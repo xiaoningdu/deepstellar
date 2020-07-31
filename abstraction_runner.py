@@ -8,16 +8,16 @@ from Abstraction.GraphWrapper import GraphWrapper
 
 if __name__ == '__main__':
     parse = argparse.ArgumentParser("Generate abstract model")
-    parse.add_argument('-dl_model', help='path of dl model')
+    parse.add_argument('-dl_model', help='path of dl model', required=True)
     # parse.add_argument('-profile_data', help="path of data to do the profiling")
-    parse.add_argument('-profile_save_path', help="dir to save profiling raw data")
-    parse.add_argument('-comp_num', help="number of component when fitting pca", type=int)  # can select a larger number
-    parse.add_argument('-k', help='number of dimension to keep', type=int)
-    parse.add_argument('-m', help="number of intervals on each dimension", type=int)
-    parse.add_argument('-bits', help="number of bits for encoding", type=int)
-    parse.add_argument('-name_prefix', help="name prefix when save the abstract model")
-    parse.add_argument('-abst_save_path', help="path to save abstract model")
-    parse.add_argument('-n_step', help="extend the graph to n_step", type=int)
+    parse.add_argument('-profile_save_path', help="dir to save profiling raw data", required=True)
+    parse.add_argument('-comp_num', help="number of component when fitting pca", type=int, required=True)  # can select a larger number
+    parse.add_argument('-k', help='number of dimension to keep', type=int, required=True)
+    parse.add_argument('-m', help="number of intervals on each dimension", type=int, required=True)
+    parse.add_argument('-bits', help="number of bits for encoding", type=int, required=True)
+    parse.add_argument('-name_prefix', help="name prefix when save the abstract model", required=True)
+    parse.add_argument('-abst_save_path', help="path to save abstract model", required=True)
+    parse.add_argument('-n_step', help="extend the graph to n_step", type=int, default=0)
 
     args = parse.parse_args()
 
