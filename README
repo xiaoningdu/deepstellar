@@ -1,7 +1,5 @@
 python=3.6
 
-sudo apt-get install graphviz
-
 pip install -r requirement.txt
 
 
