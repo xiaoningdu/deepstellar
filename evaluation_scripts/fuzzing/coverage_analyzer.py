@@ -49,7 +49,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='analyzing the fuzzing results')
     parser.add_argument('-dl_model', help='path to the dl model', required=True)
     parser.add_argument('-wrapper', help='path to the abstract graph wrapper', required=True)
-    parser.add_argument('-fuzz_output_folder', help='path to the fuzz output folder', required=True)
+    parser.add_argument('-inputs_folder', help='path to the inputs folder', required=True)
     parser.add_argument('-type', choices=['seeds', 'queue'], default='queue')
     args = parser.parse_args()
 
