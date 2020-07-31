@@ -1,0 +1,27 @@
+
+
+
+python=3.6
+
+sudo apt-get install graphviz
+
+pip install -r requirement.txt
+
+
+1. Conduct profiling on data samples and construct the DTMC abstract model
+
+python generate_abst_model.py -dl_model saved_lstm_model/mnist-lstm-model.h5 -profile_save_path output/profile_save -k 2 -m 3 -name_prefix mnist_lstm -abst_save_path output/dtmc_models
+
+
+2. Visualize the generated DTMC model and the state trace of samples
+
+python visiualizer.py -abst_model output/dtmc_models/wrapper_mnist_lstm_2_3.pkl -type model -save_folder output/visiualization/
+
+python visiualizer.py -abst_model output/dtmc_models/wrapper_mnist_lstm_2_3.pkl -type trace -save_folder output/visiualization/ -dl_model saved_lstm_model/mnist-lstm-model.h5 -sample prepared_mnist_samples/samples_to_visualize/test_2.png
+
+
+3. Detect Adversarial Samples
+
+python classify_adv.py -sample for_detection/adv/img_3.png -dl_model saved_lstm_model/mnist-lstm-model.h5 -abst_model output/dtmc_models/wrapper_lstm-mnist_2_80.pkl -classifier for_detection/reg_classifier_transition_2_80.pkl
+
+4. fuzzing tool
