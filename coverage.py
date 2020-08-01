@@ -66,12 +66,3 @@ def load_graph_pkl(pkl_dir):
     with open(pkl_dir, 'rb') as f:
         g = pickle.load(f)
     return g
-
-
-if __name__ == '__main__':
-    # print("main Test.")
-    # g = load_graph_pkl('wrapper_deepspeech2_3_20.pkl')
-    # sys.path.append('/media/lyk/DATA/deepstellar/deepstellar/AbstractModel/GraphWrapper.py')
-    import deepstellar.AbstractModel.GraphWrapper
-    abst_m = pickle.load(open('/media/lyk/DATA/dlfuzzer_data/ds1_pkls/wrapper_deepspeech2_2_5.pkl', 'rb'))
-    print(len(g.graph.states))

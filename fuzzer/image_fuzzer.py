@@ -59,13 +59,6 @@ def cifar_preprocessing(x_test):
     return temp
 
 
-model_weight_path = {
-    # 'mnist': "./saved_model/lstm-model.h5"
-    'mnist': "test/rnn_model/model.h5"
-}
-
-
-
 preprocess_dic = {
     'cifar10': cifar_preprocessing,
     'mnist': mnist_preprocessing,
@@ -166,7 +159,8 @@ if __name__ == '__main__':
     parser.add_argument('-o', help='seed output')
 
 
-    parser.add_argument('-model', help="target model fuzz", choices=['mnist', 'cifar10', 'imagenet'])
+    parser.add_argument('-model_type', help="target model fuzz", choices=['mnist', 'cifar10', 'imagenet'])
+    parser.add_argument('-dl_model', help="path to the dl model", required=True)
     parser.add_argument('-criteria', help="set the criteria to guide",
                         choices=['state', 'k-step', 'transition'], default='state')
     parser.add_argument('-k_step', help="how many outer step to check", type=int, default=0)
@@ -189,7 +183,7 @@ if __name__ == '__main__':
     os.makedirs(os.path.join(args.o, 'crashes'))
 
     lstm_classifier = MnistLSTMClassifier()
-    lstm_classifier.load_hidden_state_model(model_weight_path[args.model])
+    lstm_classifier.load_hidden_state_model(args.dl_model)
     model = lstm_classifier.model
     preprocess = preprocess_dic[args.model]
 
