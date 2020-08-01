@@ -17,7 +17,7 @@ python abstraction_runner.py -dl_model test/rnn_model/model.h5  -profile_save_pa
 
 python -m fuzzer.ConstructInitialSeeds -dl_model test/rnn_model/model.h5  -output_path ../fuzz_data/initialseeds
 
-python -m fuzzer.image_fuzzer -i ../fuzz_data/initialseeds -o ../fuzz_data/fuzzing-out-1/lstm-trans-3-10 -model mnist -criteria state -pkl_path test/output/abst_model/wrapper_lstm_mnist_3_10.pkl
+python -m fuzzer.image_fuzzer -i ../fuzz_data/initialseeds -o ../fuzz_data/fuzzing-out-1/lstm-trans-3-10 -model_type mnist -dl_model test/rnn_model/model.h5 -criteria state -pkl_path test/output/abst_model/wrapper_lstm_mnist_3_10.pkl
 
 
 3. evaluation of fuzzing
