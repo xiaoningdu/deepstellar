@@ -77,8 +77,11 @@ class MnistLSTMClassifier(AbstractRNNClassifier):
         (x_train, y_train), (x_test, y_test) = mnist.load_data()
         x_train = self.input_preprocess(x_train)
         output = self.model.predict(x_train)
+        cls = np.argmax(output[0], axis=1)
+        correct_idx = np.where(cls == y_train)[0]
         os.makedirs(profile_save_path, exist_ok=True)
-        np.save(os.path.join(profile_save_path, "states_profile.npy"), output[1])
+        states_correct = output[1][correct_idx]
+        np.save(os.path.join(profile_save_path, "states_profile.npy"), states_correct)
 
     def get_state_profile(self, inputs):
         inputs = self.input_preprocess(inputs)
