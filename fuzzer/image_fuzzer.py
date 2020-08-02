@@ -185,7 +185,7 @@ if __name__ == '__main__':
     lstm_classifier = MnistLSTMClassifier()
     lstm_classifier.load_hidden_state_model(args.dl_model)
     model = lstm_classifier.model
-    preprocess = preprocess_dic[args.model]
+    preprocess = preprocess_dic[args.model_type]
 
 
     #TODO: xiaoning  re-implement Coverage class.
