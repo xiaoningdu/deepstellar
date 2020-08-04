@@ -23,10 +23,12 @@ python abstraction_runner.py -dl_model test/rnn_model/model.h5  -profile_save_pa
 
 ## Coverage Guided Testing
 
+### Construct initial seeds
 ```shell script
-python -m fuzzer.ConstructInitialSeeds -dl_model test/rnn_model/model.h5  -output_path ../fuzz_data/initialseeds
+python -m fuzzer.construct_initial_seeds -dl_model test/rnn_model/model.h5  -output_path ../fuzz_data/initialseeds
 ```
 
+### Launch the testing process
 ```shell script
 python -m fuzzer.image_fuzzer -i ../fuzz_data/initialseeds -o ../fuzz_data/fuzzing-out-1/lstm-trans-3-10 -model_type mnist -dl_model test/rnn_model/model.h5 -criteria state -pkl_path test/output/abst_model/wrapper_lstm_mnist_3_10.pkl
 ```
