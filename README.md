@@ -1,4 +1,4 @@
-
+# DeepStellar: Model-Based Quantitative Analysis of Stateful Deep Learning Systems
 
 ## Prepare Environment
 python=3.6
@@ -53,3 +53,16 @@ python -m evaluation_scripts.fuzzing.coverage_analyzer -dl_model test/rnn_model/
 ```shell script
 python -m evaluation_scripts.fuzzing.check_unique_crash -i ../fuzz_data/fuzzing-out-1/lstm-trans-3-10/crashes
 ```
+
+### If you'd like to use Deepsteller in your research, please cite our fse paper:
+
+@inproceedings{10.1145/3338906.3338954,
+author = {Du, Xiaoning and Xie, Xiaofei and Li, Yi and Ma, Lei and Liu, Yang and Zhao, Jianjun},
+title = {DeepStellar: Model-Based Quantitative Analysis of Stateful Deep Learning Systems},
+year = {2019},
+booktitle = {Proceedings of the 2019 27th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering},
+pages = {477–487},
+series = {ESEC/FSE 2019}
+}
+  
+
