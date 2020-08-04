@@ -32,8 +32,8 @@ if __name__ == '__main__':
 
     parser.add_argument('-dl_model', help='path to model')
     parser.add_argument('-output_path', help='Out path')
-    parser.add_argument('-batch_size', type=int, help='Number of images in one batch', default=10)
-    parser.add_argument('-batch_num', type=int, help='Number of batches', default=10)
+    parser.add_argument('-batch_size', type=int, help='Number of images in one batch', default=1)
+    parser.add_argument('-batch_num', type=int, help='Number of batches', default=100)
     args = parser.parse_args()
     if not os.path.exists(args.output_path):
         os.makedirs(args.output_path)
