@@ -1,10 +1,12 @@
 import time
 import numpy as np
-from random import  randint
+from random import randint
 import tensorflow as tf
 import datetime
 import random
 import os
+
+
 class Seed(object):
     """Class representing a single element of a corpus."""
 
@@ -23,7 +25,7 @@ class Seed(object):
           Initialized object.
         """
 
-        self.clss =  cl
+        self.clss = cl
         self.metadata = metadata
         self.parent = parent
         self.root_seed = root_seed
@@ -37,11 +39,10 @@ class Seed(object):
         self.space = space
 
 
-
 class FuzzQueue(object):
     """Class that holds inputs and associated coverage."""
 
-    def __init__(self,outdir, is_random, sample_type, cov_num, criteria):
+    def __init__(self, outdir, is_random, sample_type, cov_num, criteria):
         """Init the class.
 
         Args:
@@ -72,7 +73,6 @@ class FuzzQueue(object):
         self.last_crash_time = self.start_time
         self.last_reg_time = self.start_time
 
-
         self.total_queue = 0
 
         self.dry_run_cov = None
@@ -84,11 +84,9 @@ class FuzzQueue(object):
         self.REG_MIN = 0.3
         self.REG_INIT_PROB = 0.8
 
-
-
     def has_new_bits(self, seed):
 
-        temp = np.invert(seed.coverage, dtype = np.uint8)
+        temp = np.invert(seed.coverage, dtype=np.uint8)
         cur = np.bitwise_and(self.virgin_bits, temp)
         has_new = not np.array_equal(cur, self.virgin_bits)
         if has_new:
@@ -113,30 +111,31 @@ class FuzzQueue(object):
              round(float(self.mutations_processed) / (current_time - self.start_time), 2)
              ))
         self.plot_file.flush()
+
     def write_logs(self):
         log_file = open(os.path.join(self.out_dir, 'fuzz.log'), 'w+')
         for k in self.seed_attacked_first_time:
-            log_file.write("%s:%s\n"%(k, self.seed_attacked_first_time[k]))
+            log_file.write("%s:%s\n" % (k, self.seed_attacked_first_time[k]))
         log_file.close()
         self.plot_file.close()
-
 
     def log(self):
         queue_len = len(self.queue)
         coverage = self.compute_cov()
         current_time = time.time()
         tf.logging.info(
-                "criteria %s | corpus_size %s | crashes_size %s | mutations_per_second: %s | total_exces %s | last new reg: %s | last new adv %s | coverage: %s -> %s%%",
-                self.criteria,
-                queue_len,
-                self.uniq_crashes,
-                round(float(self.mutations_processed)/(current_time - self.start_time), 2),
-                self.mutations_processed,
-                datetime.timedelta(seconds=(time.time() - self.last_reg_time)),
-                datetime.timedelta(seconds=(time.time() - self.last_crash_time)),
-                self.dry_run_cov,
-                coverage
-            )
+            "criteria %s | corpus_size %s | crashes_size %s | mutations_per_second: %s | total_exces %s | last new reg: %s | last new adv %s | coverage: %s -> %s%%",
+            self.criteria,
+            queue_len,
+            self.uniq_crashes,
+            round(float(self.mutations_processed) / (current_time - self.start_time), 2),
+            self.mutations_processed,
+            datetime.timedelta(seconds=(time.time() - self.last_reg_time)),
+            datetime.timedelta(seconds=(time.time() - self.last_crash_time)),
+            self.dry_run_cov,
+            coverage
+        )
+
     def compute_cov(self):
 
         coverage = round(float(self.total_cov - np.count_nonzero(self.virgin_bits == 0xFF)) * 100 / self.total_cov, 2)
@@ -162,6 +161,7 @@ class FuzzQueue(object):
             return self.deeptest_next2()
         elif self.sample_type == 'prob':
             return self.prob_next()
+
     def random_select(self):
         """Grabs new input from corpus according to sample_function."""
         # choice = self.sample_function(self)
@@ -171,8 +171,6 @@ class FuzzQueue(object):
     def deeptest_next(self):
         choice = self.queue[-1]
         return choice
-
-
 
     def fuzzer_handler(self, iteration, cur_seed, bug_found, coverage_inc):
         if self.sample_type == 'deeptest' and not coverage_inc:
@@ -189,7 +187,7 @@ class FuzzQueue(object):
     def deeptest_next2(self):
         if self.current_id == len(self.queue):
             self.current_id = 0
-        choice =self.queue[self.current_id]
+        choice = self.queue[self.current_id]
         self.current_id += 1
         return choice
 
@@ -201,7 +199,7 @@ class FuzzQueue(object):
                 self.current_id = 0
 
             cur_seed = self.queue[self.current_id]
-            if cur_seed.space > 0 and randint(0,100) < cur_seed.probability * 100:
+            if cur_seed.space > 0 and randint(0, 100) < cur_seed.probability * 100:
                 # if cur_seed.probability > REG_MIN  and cur_seed.fuzzed_time < REG_GAMMA * (1-REG_MIN):
                 #     cur_seed.probability = REG_INIT_PROB - float(cur_seed.fuzzed_time)/REG_GAMMA
 

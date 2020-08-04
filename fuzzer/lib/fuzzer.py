@@ -1,19 +1,20 @@
 import tensorflow as tf
 import gc
-import time
+
+
 class Fuzzer(object):
     """Class representing the fuzzer itself."""
 
     def __init__(
-        self,
-        corpus,
-        coverage_function,
-        metadata_function,
-        objective_function,
-        mutation_function,
-        fetch_function,
-        iterate_function,
-        plot = True
+            self,
+            corpus,
+            coverage_function,
+            metadata_function,
+            objective_function,
+            mutation_function,
+            fetch_function,
+            iterate_function,
+            plot=True
     ):
         """Init the class.
 
@@ -49,7 +50,6 @@ class Fuzzer(object):
                 tf.logging.info("fuzzing iteration: %s", iteration)
                 gc.collect()
 
-
             parent = self.queue.select_next()
             # Get a mutated batch for each input tensor
             mutated_data_batches = self.mutation_function(parent)
@@ -59,7 +59,6 @@ class Fuzzer(object):
             )
             if self.plot:
                 self.queue.plot_log(iteration)
-
 
             if coverage_batches is not None and len(coverage_batches) > 0:
                 # Get the coverage - one from each batch element
@@ -71,14 +70,14 @@ class Fuzzer(object):
                 # Check for new coverage and create new corpus elements if necessary.
                 # pylint: disable=consider-using-enumerate
 
-                bug_found, cov_inc = self.iterate_function(self.queue, parent.root_seed, parent, mutated_coverage_list, mutated_data_batches,mutated_metadata_list, self.objective_function)
+                bug_found, cov_inc = self.iterate_function(self.queue, parent.root_seed, parent, mutated_coverage_list,
+                                                           mutated_data_batches, mutated_metadata_list,
+                                                           self.objective_function)
                 del mutated_coverage_list
                 del mutated_metadata_list
             else:
                 bug_found = False
                 cov_inc = False
-
-
 
             self.queue.fuzzer_handler(iteration, parent, bug_found, cov_inc)
             iteration += 1
@@ -86,7 +85,6 @@ class Fuzzer(object):
             del mutated_data_batches
             del coverage_batches
             del metadata_batches
-
 
         self.queue.write_logs()
         return None

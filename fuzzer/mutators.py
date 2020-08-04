@@ -1,15 +1,11 @@
 from __future__ import print_function
-import sys
 import cv2
 import numpy as np
 import random
 import time
 import copy
-# reload(sys)
-# sys.setdefaultencoding('utf8')
 
 
-# keras 1.2.2 tf:1.2.0
 class Mutators():
     def image_translation(img, params):
 
@@ -26,7 +22,7 @@ class Mutators():
         # res = cv2.resize(img, None, fx=params[0], fy=params[1], interpolation=cv2.INTER_CUBIC)
         rows, cols, ch = img.shape
         res = cv2.resize(img, None, fx=params, fy=params, interpolation=cv2.INTER_CUBIC)
-        res = res.reshape((res.shape[0],res.shape[1],ch))
+        res = res.reshape((res.shape[0], res.shape[1], ch))
         y, x, z = res.shape
         if params > 1:  # need to crop
             startx = x // 2 - cols // 2
@@ -168,6 +164,7 @@ class Mutators():
 
     classA = [7, 8]
     classB = [0, 1, 2, 3, 4, 5, 6]
+
     # classB = [5, 6]
     # classB = []
     @staticmethod
@@ -228,7 +225,7 @@ class Mutators():
         # l_infinity = 150
 
         test = np.load(seed.fname)
-        test = np.expand_dims(test,axis=-1)
+        test = np.expand_dims(test, axis=-1)
         ori_img = test[0]
         img = test[1]
         cl = seed.clss
@@ -244,9 +241,9 @@ class Mutators():
         # ori_batches = np.squeeze(ori_batches)
         # batches = np.squeeze(batches)
         if len(ori_batches) > 0:
-            ori_batches = np.squeeze(np.asarray(ori_batches),axis=-1)
-            batches =  np.squeeze(np.asarray(batches),axis=-1)
-        return (ori_batches,batches, cl_batches)
+            ori_batches = np.squeeze(np.asarray(ori_batches), axis=-1)
+            batches = np.squeeze(np.asarray(batches), axis=-1)
+        return (ori_batches, batches, cl_batches)
 
     @staticmethod
     def mutate_two(seed, batch_num):
@@ -280,40 +277,3 @@ class Mutators():
                 cl_batches.append(cl_out)
 
         return (np.asarray(ori_batches), np.asarray(batches), cl_batches)
-
-
-
-
-if __name__ == '__main__':
-    print("main Test.")
-
-
-    #
-    # # Load an color image in grayscale
-    # img = cv2.imread('example.jpg')
-    # # img = cv2.imread('example.jpg', 0)
-    #
-    # # img = Mutators.image_brightness(img, 100)
-    #
-    # ori_img = img
-    # oo = copy.deepcopy(ori_img)
-    # cl = 0
-    # total = 0
-    # # cv2.imshow('im', ori_img)
-    # q = Mutators()
-    # ori_img = q.image_scale(ori_img, 0.5)
-    #
-    # # for i in range(100):
-    # #     ori_img, img, cl, changed = Mutators.image_random_mutate(ori_img, img, cl)
-    # #     if not changed:
-    # #         total += 1
-    # #         print('index111 {}\n'.format(i))
-    #
-    # cv2.imshow('image', ori_img)
-    # cv2.imshow('updated_img', img)
-    #
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
-
-    # write out image
-    # cv2.imwrite('messigray.png',img)
