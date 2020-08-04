@@ -13,14 +13,13 @@ if __name__ == '__main__':
     hash_set = set()
     for i in dirs:
         crash_seed = os.path.join(args.i, i)
-        seed = np.load(crash_seed)[1:2]
+        seed = np.load(crash_seed)
 
         h = xxhash.xxh64()
         h.update(seed)
         q = h.intdigest()
         if q not in hash_set:
             hash_set.add(q)
-        h.reset()
 
     print(len(hash_set))
     print('finish')
