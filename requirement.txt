@@ -7,3 +7,4 @@ joblib
 pillow
 opencv-python
 xxhash
+graphviz
