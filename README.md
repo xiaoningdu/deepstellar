@@ -54,8 +54,9 @@ python -m evaluation_scripts.fuzzing.coverage_analyzer -dl_model test/rnn_model/
 python -m evaluation_scripts.fuzzing.check_unique_crash -i ../fuzz_data/fuzzing-out-1/lstm-trans-3-10/crashes
 ```
 
-### If you'd like to use Deepsteller in your research, please cite our fse paper:
+### If you'd like to use Deepsteller in your research, please cite our FSE'19 paper:
 
+```shell script
 @inproceedings{10.1145/3338906.3338954,
 author = {Du, Xiaoning and Xie, Xiaofei and Li, Yi and Ma, Lei and Liu, Yang and Zhao, Jianjun},
 title = {DeepStellar: Model-Based Quantitative Analysis of Stateful Deep Learning Systems},
@@ -64,5 +65,7 @@ booktitle = {Proceedings of the 2019 27th ACM Joint Meeting on European Software
 pages = {477–487},
 series = {ESEC/FSE 2019}
 }
+```
+
   
 
