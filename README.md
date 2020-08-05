@@ -54,7 +54,7 @@ python -m evaluation_scripts.fuzzing.coverage_analyzer -dl_model test/rnn_model/
 python -m evaluation_scripts.fuzzing.check_unique_crash -i ../fuzz_data/fuzzing-out-1/lstm-trans-3-10/crashes
 ```
 
-### If you'd like to use Deepsteller in your research, please cite our FSE'19 paper:
+### If you would like to use Deepsteller in your research, please cite our FSE'19 paper:
 
 ```shell script
 @inproceedings{10.1145/3338906.3338954,
